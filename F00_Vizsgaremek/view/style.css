@@ -1,0 +1,29 @@
+body{
+  background-color: #aa5cb1;
+}
+
+#bevetel{
+  width: 100%;
+  padding: 20px;
+  background-color: rgb(152, 79, 221);
+  border-radius: 10px;
+  position: static;
+  margin: 0;
+}
+
+#kiadas{
+  width: 100%;
+  padding: 20px;
+  background-color: rgb(225, 82, 230);
+  border-radius: 10px;
+  position: static;
+  margin: 0;
+}
+
+#osszesito{
+
+}
+
+input{
+  text-align: right;
+}
