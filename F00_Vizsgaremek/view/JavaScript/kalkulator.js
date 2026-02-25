@@ -1,4 +1,6 @@
-  document.addEventListener("DOMContentLoaded", function(){
+console.log("JS betöltve!")
+
+document.addEventListener("DOMContentLoaded", function(){
 
   let reszletek=document.querySelectorAll(".RezsiReszlet");
   let OsszesMezo=document.getElementById("RezsiOssz");
@@ -81,7 +83,7 @@
 
   document.addEventListener("DOMContentLoaded", function(){
 
-  let reszletek=document.querySelectorAll(".VasarlasokReszlet");
+  let reszletek=document.querySelectorAll(".SzabadidoReszlet");
   let OsszesMezo=document.getElementById("SzabadidoOssz");
 
   for(let i=0; i<reszletek.length; i++){
@@ -119,7 +121,8 @@
   });
 
 
-//Összesítő
+
+ //Összesítő:
 
 document.addEventListener("DOMContentLoaded", function(){
   let BevetelReszletek=document.querySelectorAll(".BevetelReszlet");
@@ -159,18 +162,35 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 });
 
+//Egyenleg
 
 document.addEventListener("DOMContentLoaded", function(){
-  let OsszesBevetelMezo=document.querySelector("#OsszBevetel");
-  let OsszesKiadasMezo=document.querySelector("#OsszKiadas");
   let EgyenlegMezo=document.getElementById("egyenleg");
+  let bevetelMezok=document.querySelectorAll(".BevetelReszlet");
+  let kiadasMezok=document.querySelectorAll(".OsszKiadasReszlet");
 
-function EgyenlegSzamol(){
-  let bevetel=Number(OsszesBevetelMezo.value) || 0;
-  let kiadas=Number(OsszesKiadasMezo.value) || 0;
+    function EgyenlegSzamol(){
+  console.log("Függvény fut!");
+
+  let bevetel=0;
+  let kiadas=0;
+
+  bevetelMezok.forEach(m => {
+  bevetel += Number(m.value) || 0;
+  });
+
+  kiadasMezok.forEach(m => {
+  kiadas+= Number(m.value) || 0;
+  });
+
+  console.log("Bevétel:", bevetel, "Kiadás:", kiadas);
 
   EgyenlegMezo.value=bevetel-kiadas;
 }
-OsszesBevetelMezo.addEventListener("input", EgyenlegSzamol);
-OsszesKiadasMezo.addEventListener("input", EgyenlegSzamol);
+
+bevetelMezok.forEach(m => m.addEventListener("input", EgyenlegSzamol));
+kiadasMezok.forEach(m.addEventListener("input", EgyenlegSzamol));
+
+EgyenlegSzamol();
 });
+

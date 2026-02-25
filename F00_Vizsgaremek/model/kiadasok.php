@@ -1,99 +1,77 @@
 <?php
 
-class Kiadasok{
-  private int $Kiadasok_Id;
-  private int $Osszeg;
-  private int $Datum;
-  private int $Kategoria_Id;
-  private int $Gyerek_Id;
-  private string $Megjegyzes;
+class Kiadasok
+{
+  private string $Kiadasok_Id;
+  private float $Osszeg;
+  private string $Datum;
+  private string $Kategoria_Id;
 
-  public function __construct(int $Kiadasok_Id, int $Osszeg, int $Datum, int $Kategoria_Id, int $Gyerek_Id, int $Megjegyzes){
+  public function __construct(string $Kiadasok_Id, float $Osszeg, string $Datum, string $Kategoria_Id)
+  {
     $this->setKiadasok_Id($Kiadasok_Id);
     $this->setOsszeg($Osszeg);
     $this->setDatum($Datum);
     $this->setKategoria_Id($Kategoria_Id);
-    $this->setMegjegyzes($Megjegyzes);
   }
 
 
-  public function getKiadasok_Id():int{
+  public function getKiadasok_Id(): string
+  {
     return $this->Kiadasok_Id;
   }
 
-  public function getOsszeg():int{
+  public function getOsszeg(): float
+  {
     return $this->Osszeg;
   }
 
-  public function getDatum():int{
+  public function getDatum(): string
+  {
     return $this->Datum;
   }
 
-  public function getKategoria_Id():int{
+  public function getKategoria_Id(): string
+  {
     return $this->Kategoria_Id;
   }
 
-  public function getGyerek_Id():int{
-    return $this->Gyerek_Id;
+  private function setKiadasok_Id(string $Kiadasok_Id): void
+  {
+    $Kiadasok_Id = trim($Kiadasok_Id);
+    if ($Kiadasok_Id === "") {
+      throw new InvalidArgumentException("A Kiadások azonosító megadása kötelező!");
+    }
+    $this->Kiadasok_Id = $Kiadasok_Id;
   }
 
-  public function getMegjegyzes():string{
-    return $this->Megjegyzes;
+  private function setOsszeg(float $Osszeg): void
+  {
+    if ($Osszeg < 0) {
+      throw new InvalidArgumentException("Az összeg nem lehet negatív!");
+    }
+    $this->Osszeg = $Osszeg;
   }
 
+  private function setDatum(string $Datum): void
+  {
+    $Datum = trim($Datum);
+    if ($Datum === "") {
+      throw new InvalidArgumentException("A dátum megadása kötelező!");
+    }
 
-
-private function setKiadasok_Id(int $Kiadasok_Id):void{
-  if($Kiadasok_Id>=0){
-    $this->Kiadasok_Id=$Kiadasok_Id;
+    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $Datum)) {
+      throw new InvalidArgumentException("A dátum formátuma hibás (YYYY-MM-DD).");
+    }
+    $this->Datum = $Datum;
   }
-  else{
-    throw new InvalidArgumentException("A Kiadások azonosító nem lehet negatív!");
+
+  public function setKategoria_Id(string $Kategoria_Id): void
+  {
+    $Kategoria_Id = trim($Kategoria_Id);
+    if ($Kategoria_Id === "") {
+      throw new InvalidArgumentException("A kategória azonosító megadása kötelező!");
+    }
+    $this->Kategoria_Id = $Kategoria_Id;
   }
 }
-
-private function setOsszeg(int $Osszeg):void{
-  if($Osszeg>=0){
-    $this->Osszeg=$Osszeg;
-  }
-  else{
-    throw new InvalidArgumentException("Az Összeg nem lehet negatív!");
-  }
-}
-
-private function setDatum(int $Datum):void{
-  if($Datum>=0){
-    $this->Datum=$Datum;
-  }
-  else{
-    throw new InvalidArgumentException("A dátum nem lehet negatív!");
-  }
-}
-
-  public function setKategoria_Id(int $Kategoria_Id):void{
-    if($Kategoria_Id>=0){
-      $this->Kategoria_Id=$Kategoria_Id;
-    }
-    else{
-      throw new InvalidArgumentException("A Kategoria azonosító nem lehet negatív!");
-    }
-  }
-
-  public function setGyerek_Id(int $Gyerek_Id):void{
-    if($Gyerek_Id>=0){
-      $this->Gyerek_Id=$Gyerek_Id;
-    }
-    else{
-      throw new InvalidArgumentException("A gyerek azonosító nem lehet negatív!");
-    }
-  }
-
-  public function setMegjegyzes(string $Megjegyzes):void{
-    if(strlen(trim($Megjegyzes))>0){
-      $this->Megjegyzes=$Megjegyzes;
-    }
-    else{
-      throw new InvalidArgumentException("A megjegyzés kitöltése kötelező");
-    }
-  }
-};

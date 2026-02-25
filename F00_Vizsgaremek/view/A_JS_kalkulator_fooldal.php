@@ -6,13 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalkulátor</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" type="text/css" href="../view/style.css">
 </head>
 
 <body>
   <?php include_once("base/navbar.html") ?>
 
-  <div class="container my-4">
+  <?php if (!empty($ErrorUzenet)): ?>
+    <div class="alert alert-danger container mt-3"><?= htmlspecialchars($ErrorUzenet) ?></div>
+  <?php endif; ?>
+
+  <?php if (!empty($SuccessUzenet)): ?>
+    <div class="alert alert-success container mt-3"><?= htmlspecialchars($SuccessUzenet) ?></div>
+  <?php endif; ?>
+
+  <div class=" container my-4">
     <div class="row g-4">
 
       <!-- KIADÁS -->
@@ -20,20 +28,19 @@
         <div id="kiadas">
           <h1>Kiadás</h1>
 
-          <div class="row align-items-center">
-            <div class="col-8">
-              <b>Rezsi költség</b>
+          <form action="../controller/controller.php" method="post">
+            <input type="hidden" name="Mentes" value="KiadasMentes">
+
+            <div class="row align-items-center">
+              <div class="col-8">
+                <b>Rezsi költség</b>
+              </div>
+
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto" type="number" min="0" name="RezsiOssz" id="RezsiOssz" placeholder="0" readonly>
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
-
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto" type="number" min="0" name="RezsiOssz" id="RezsiOssz" placeholder="0">
-              <span class="align-self-center">Ft</span>
-            </div>
-          </div>
-
-
-          <details class="mt-2">
-            <summary class="small">Részletezés</summary>
 
             <div class="mt-2">
 
@@ -102,22 +109,19 @@
               </div>
 
             </div>
-          </details>
 
 
-          <div class="row align-items-center">
-            <div class="col-8">
-              <b>Közlekedés</b>
+            <div class="row align-items-center">
+              <div class="col-8">
+                <b>Közlekedés</b>
+              </div>
+
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto" type="number" min="0" name="KozlekedesOssz" id="KozlekedesOssz" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
 
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto" type="number" min="0" name="KozlekedesOssz" id="KozlekedesOssz" placeholder="0">
-              <span class="align-self-center">Ft</span>
-            </div>
-          </div>
-
-          <details class="mt-2">
-            <summary class="small">Részletezés</summary>
 
             <div class="mt-2">
 
@@ -176,33 +180,29 @@
               </div>
 
             </div>
-          </details>
 
-          <div class="row align-items-center">
-            <div class="col-8">
-              <b>Törlesztések</b>
+            <div class="row align-items-center  mb-3">
+              <div class="col-8">
+                <b>Törlesztések</b>
 
-            </div>
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto OsszKiadasReszlet" type="number" min="0" name="TorlesztesekOssz" id="TorlesztesekOssz" placeholder="0">
-              <span class="align-self-center">Ft</span>
-            </div>
-          </div>
-
-
-          <div class="row align-items-center">
-            <div class="col-8">
-              <b>Előfizetések</b>
+              </div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto OsszKiadasReszlet" type="number" min="0" name="TorlesztesekOssz" id="TorlesztesekOssz" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
 
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto" type="number" min="0" name="ElofizetesekOssz" id="ElofizetesekOssz" placeholder="0">
-              <span class="align-self-center">Ft</span>
-            </div>
-          </div>
 
-          <details class="mt-2">
-            <summary class="small">Részletezés</summary>
+            <div class="row align-items-center">
+              <div class="col-8">
+                <b>Előfizetések</b>
+              </div>
+
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto" type="number" min="0" name="ElofizetesekOssz" id="ElofizetesekOssz" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
+            </div>
 
             <div class="mt-2">
 
@@ -229,33 +229,29 @@
               </div>
 
             </div>
-          </details>
 
 
-          <div class="row align-items-center">
-            <div class="col-8">
-              <b>Oktatással kapcsolatos költségek</b>
-            </div>
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto OsszKiadasReszlet" type="number" min="0" name="Oktatas" id="Oktatas" placeholder="0">
-              <span class="align-self-center">Ft</span>
-            </div>
-          </div>
-
-
-          <div class="row align-items-center">
-            <div class="col-8">
-              <b>Vásárlások</b>
+            <div class="row align-items-center mb-3">
+              <div class="col-8">
+                <b>Oktatással kapcsolatos költségek</b>
+              </div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto OsszKiadasReszlet" type="number" min="0" name="Oktatas" id="Oktatas" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
 
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto" type="number" min="0" name="VasarlasokOssz" id="VasarlasokOssz" placeholder="0">
-              <span class="align-self-center">Ft</span>
-            </div>
-          </div>
 
-          <details class="mt-2">
-            <summary class="small">Részletezés</summary>
+            <div class="row align-items-center">
+              <div class="col-8">
+                <b>Vásárlások</b>
+              </div>
+
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto" type="number" min="0" name="VasarlasokOssz" id="VasarlasokOssz" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
+            </div>
 
             <div class="mt-2">
 
@@ -329,23 +325,20 @@
               </div>
 
             </div>
-          </details>
 
 
 
-          <div class="row align-items-center">
-            <div class="col-8">
-              <b>Szabadidő</b>
+            <div class="row align-items-center">
+              <div class="col-8">
+                <b>Szabadidő</b>
+              </div>
+
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto" type="number" min="0" name="SzabadidoOssz" id="SzabadidoOssz" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
 
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto" type="number" min="0" name="SzabadidoOssz" id="SzabadidoOssz" placeholder="0">
-              <span class="align-self-center">Ft</span>
-            </div>
-          </div>
-
-          <details class="mt-2">
-            <summary class="small">Részletezés</summary>
 
             <div class="mt-2">
 
@@ -386,35 +379,31 @@
               </div>
 
             </div>
-          </details>
 
 
-
-          <div class="row align-items-center">
-            <div class="col-8">
-              <b>Ajándékozás</b>
-            </div>
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto OsszKiadasReszlet" type="number" min="0" name="Ajandekozas" id="Ajandekozas" placeholder="0">
-              <span class="align-self-center">Ft</span>
-            </div>
-          </div>
-
-
-
-          <div class="row align-items-center">
-            <div class="col-8">
-              <b>Rendkívüli egyéb kiadások</b>
+            <div class="row align-items-center mb-3">
+              <div class="col-8">
+                <b>Ajándékozás</b>
+              </div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto OsszKiadasReszlet" type="number" min="0" name="Ajandekozas" id="Ajandekozas" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
 
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto " type="number" min="0" name="RendkivuliOssz" id="RendkivuliOssz" placeholder="0">
-              <span class="align-self-center">Ft</span>
-            </div>
-          </div>
 
-          <details class="mt-2">
-            <summary class="small">Részletezés</summary>
+
+            <div class="row align-items-center">
+              <div class="col-8">
+                <b>Rendkívüli egyéb kiadások</b>
+              </div>
+
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto " type="number" min="0" name="RendkivuliOssz" id="RendkivuliOssz" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
+            </div>
+
 
             <div class="mt-2">
 
@@ -446,14 +435,20 @@
               </div>
 
             </div>
-          </details>
 
-          <input type="hidden" name="Mentes" value="KiadasMentes">
-          <div class="d-grid mt-3">
-            <button type="submit" class="btn btn-primary">Kiadások mentése</button>
-          </div>
+            <div class="row align-items-center mb-2">
+              <div class="col-8">Dátum</div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto" type="date" name="Datum" id="DatumKiadas" required>
+              </div>
+            </div>
 
+            <div class="d-grid mt-3">
+              <button type="submit" class="btn btn-primary">Kiadások mentése</button>
+            </div>
           </form>
+
+
         </div>
       </div>
 
@@ -465,62 +460,79 @@
         <div id="bevetel">
           <h1>Bevétel</h1>
 
-          <div class="row align-items-center mb-2">
-            <div class="col-8">Havi cafatéria</div>
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="cafateria" id="cafateria" placeholder="0">
-              <span class="align-self-center">Ft</span>
+          <form action="../controller/controller.php" method="post">
+            <input type="hidden" name="Mentes" value="BevetelMentes">
+
+            <div class="row align-items-center mb-2">
+              <div class="col-8">Jövedelem</div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="jovedelem" id="jovedelem" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
-          </div>
 
-          <div class="row align-items-center mb-2">
-            <div class="col-8">Családi pótlék</div>
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="CsaladiPotlek" id="CsaladiPotlek" placeholder="0">
-              <span class="align-self-center">Ft</span>
+            <div class="row align-items-center mb-2">
+              <div class="col-8">Cafatéria</div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="cafateria" id="cafateria" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
-          </div>
 
-          <div class="row align-items-center mb-2">
-            <div class="col-8">Mellék állásból származó bevétel</div>
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="MellekAllas" id="MellekAllas" placeholder="0">
-              <span class="align-self-center">Ft</span>
+            <div class="row align-items-center mb-2">
+              <div class="col-8">Családi pótlék</div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="CsaladiPotlek" id="CsaladiPotlek" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
-          </div>
 
-          <div class="row align-items-center mb-2">
-            <div class="col-8">Anyasági támogatás(CSED, GYED, GYES, GYOD...)</div>
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="anyasagi" id="anyasagi" placeholder="0">
-              <span class="align-self-center">Ft</span>
+            <div class="row align-items-center mb-2">
+              <div class="col-8">Mellék állásból származó bevétel</div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="MellekAllas" id="MellekAllas" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
-          </div>
 
-          <div class="row align-items-center mb-2">
-            <div class="col-8">Családtámogatás</div>
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="CsaladiTamogatas" id="CsaladiTamogatas" placeholder="0">
-              <span class="align-self-center">Ft</span>
+            <div class="row align-items-center mb-2">
+              <div class="col-8">Anyasági támogatás(CSED, GYED, GYES, GYOD...)</div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="Anyasagi" id="Anyasagi" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
-          </div>
 
-          <div class="row align-items-center mb-2">
-            <div class="col-8">Egyéb bevételek</div>
-            <div class="col-4 d-flex justify-content-end gap-2">
-              <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="EgyebBevetelek" id="EgyebBevetelek" placeholder="0">
-              <span class="align-self-center">Ft</span>
+            <div class="row align-items-center mb-2">
+              <div class="col-8">Családtámogatás</div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="CsaladiTamogatas" id="CsaladiTamogatas" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
             </div>
-          </div>
 
+            <div class="row align-items-center mb-2">
+              <div class="col-8">Egyéb bevételek</div>
+              <div class="col-4 d-flex justify-content-end gap-2">
+                <input class="form-control w-auto BevetelReszlet" type="number" min="0" name="EgyebBevetelek" id="EgyebBevetelek" placeholder="0">
+                <span class="align-self-center">Ft</span>
+              </div>
 
-          <input type="hidden" name="Mentes" value="BevetelMentes">
-          <div class="d-grid mt-3">
-            <button type="submit" class="btn btn-success">Bevétel mentése</button>
-          </div>
+              <div class="mt-2">
+                <div class="row align-items-center mb-2">
+                  <div class="col-8">Dátum</div>
+                  <div class="col-4 d-flex justify-content-end gap-2">
+                    <input class="form-control w-auto" type="date" name="Datum" id="DatumBevetel" required>
+                  </div>
+                </div>
 
-
+                <input type="hidden" name="Mentes" value="BevetelMentes">
+                <div class="d-grid mt-3">
+                  <button type="submit" class="btn btn-success">Bevétel mentése</button>
+                </div>
           </form>
+
+
         </div>
       </div>
 
@@ -529,8 +541,15 @@
 
   <!-- ÖSSZESÍTŐ-->
 
+
+
   <div class="container my-4">
     <div class="row mt-4">
+
+      <?php if ($error !== ""): ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+      <?php endif; ?>
+
 
       <div class="col-lg-12">
         <div id="osszesito">
@@ -557,7 +576,7 @@
               </div>
 
               <div class="col-md-4">
-                <label class="form-label" for="Egyenleg">Egyenleg</label>
+                <label class="form-label" for="egyenleg">Egyenleg</label>
                 <div class="input-group">
                   <input class="form-control" type="number" name="egyenleg" id="egyenleg" value="0" readonly>
                   <span class="input-group-text">Ft</span>
@@ -574,7 +593,9 @@
   </div>
 
   <?php include_once("base/footer.html") ?>
-  <script src="./JavaScript/kalkulator.js"></script>
+
+
+  <script src="../view/JavaScript/kalkulator.js"></script>
 
 </body>
 
