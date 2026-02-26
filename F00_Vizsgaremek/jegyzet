@@ -1,0 +1,119 @@
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-12">
+        <h1>Táblák megjelenítése</h1>
+
+
+
+        <h2 class="mt-5">Kiadás tábla</h2>
+        <table class="table table-striped my-4">
+          <thead class="table-danger">
+            <tr>
+              <th>Dátum</th>
+              <th>Összeg</th>
+              <th>Kategória</th>
+              <th>Csoportorsítás</th>
+              <th>Módosítás</th>
+              <th>Törlés</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <?php
+            for ($i = 0; $i < count($KiadasokLista); $i++) {
+              echo ("<tr>");
+              echo ("<td>" . $KiadasokLista[$i]->getDatum() .  "</td>");
+              echo ("<td>" . $KiadasokLista[$i]->getOsszeg() . "Ft</td>");
+              echo ("<td>" . $KiadasokLista[$i]->getNev() .  "</td>");
+              echo ("<td>" . $KiadasokLista[$i]->getCsoportositas() .  "</td>");
+            }
+            ?>
+          </tbody>
+        </table>
+
+        <div class="col-12">
+          <h1>Táblák megjelenítése</h1>
+
+          <h2>Bevétel tábla</h2>
+          <?php
+          if ($error != "") {
+            print("h2 style='color:red;'>" . $error . "</h2>");
+          }
+          ?>
+
+          <table class="table table-striped my-4">
+            <thead class="table-warning">
+              <tr>
+                <th>Kategória</th>
+                <th>Összeg</th>
+                <th>Csoportorsítás</th>
+                <th>Dátum</th>
+                <th>Módosítás</th>
+                <th>Törlés</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+              <?php
+
+              ?>
+            </tbody>
+          </table>
+
+
+        </div>
+        <form action="../controller/controller.php" method="post" class="my-3">
+          <input type="hidden" name="Mentes" value="ReszletekCSV">
+          <button type="submit" name="Letöltés" value="ReszletekCSV" class="btn btn-danger">Részletek letöltése (CSV)</button>
+        </form>
+      </div>
+
+    </div>
+
+
+    // BEVÉTELEK LEKÉRÉSE
+    var xhrBevetel = new XMLHttpRequest();
+
+    xhrBevetel.open("GET", "../api/bevetelek.php");
+
+    xhrBevetel.onreadystatechange = function () {
+
+    // ha a válasz megérkezett
+    if (xhrBevetel.readyState == 4 && xhrBevetel.status == 200) {
+
+    // JSON átalakítása
+    var adatok = JSON.parse(xhrBevetel.responseText);
+
+    // törzs kiválasztása
+    var tbody = document.getElementById("bevetelekTorzs");
+    tbody.innerHTML = "";
+
+    // sorok létrehozása
+    for (var i = 0; i < adatok.length; i++) {
+
+      var tr=document.createElement("tr");
+
+      var td1=document.createElement("td");
+      td1.appendChild(document.createTextNode(adatok[i].Bevetelek_Id));
+
+      var td2=document.createElement("td");
+      td2.appendChild(document.createTextNode(adatok[i].Datum));
+
+      var td3=document.createElement("td");
+      td3.appendChild(document.createTextNode(adatok[i].Osszeg));
+
+      var td4=document.createElement("td");
+      td4.appendChild(document.createTextNode(adatok[i].Kategoria_Id));
+
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+      tr.appendChild(td4);
+
+      tbody.appendChild(tr);
+      }
+      }
+      };
+
+      xhrBevetel.send(null);

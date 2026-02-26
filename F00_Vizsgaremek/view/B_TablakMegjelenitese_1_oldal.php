@@ -15,43 +15,55 @@
   <div class="container my-4">
     <div class="row">
       <div class="col-12">
-        <h1>Táblák megjelenítése</h1>
-        <?php
-        if ($error != "") {
-          print("h2 style='color:red;'>" . $error . "</h2>");
-        }
-        ?>
+        <h1 class="text-center">Táblák megjelenítése</h1>
 
+        <h2>Kiadás táblák</h2>
         <table class="table table-striped my-4">
-          <thead class="table-danger">
+          <thead class="table-danger text-center">
             <tr>
-              <th>Kategória azonosító</th>
               <th>Név</th>
-              <th>Típus</th>
-              <th>Csoportosítás</th>
+              <th>Dátum</th>
+              <th>Összeg</th>
               <th>Módosítás</th>
               <th>Törlés</th>
             </tr>
-
           </thead>
+          <tbody id="bevetelTorzs"></tbody>
+        </table>
+      </div>
 
-          <tbody>
-            <?php
-for($i=0; $i<count($))
-            ?>
-          </tbody>
+      <div class="col-12">
+
+        <h2>Bevétel táblák</h2>
+        <table class="table table-striped my-4">
+          <thead class="table-danger text-center">
+            <tr>
+              <th>Név</th>
+              <th>Dátum</th>
+              <th>Összeg</th>
+              <th>Módosítás</th>
+              <th>Törlés</th>
+            </tr>
+          </thead>
+          <tbody id="kiadasTorzs"></tbody>
         </table>
 
       </div>
-      <form action="../controller/controller.php" method="post" class="my-3">
-        <input type="hidden" name="Mentes" value="ReszletekCSV">
-        <button type="submit" name="Letöltés" value="ReszletekCSV" class="btn btn-danger">Részletek letöltése (CSV)</button>
-      </form>
     </div>
+    <form action="../controller/controller.php" method="post" class="my-3">
+      <input type="hidden" name="Mentes" value="ReszletekCSV">
+      <button type="submit" name="Letöltés" value="ReszletekCSV" class="btn btn-danger">Részletek letöltése (CSV)</button>
+    </form>
+  </div>
+  </div>
 
   </div>
 
+
+
+
   <?php include_once("base/footer.html") ?>
+  <script src="/F00_Vizsgaremek/view/JavaScript/reszletek.js"></script>
 </body>
 
 </html>
