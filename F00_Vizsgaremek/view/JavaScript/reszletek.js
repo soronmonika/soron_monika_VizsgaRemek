@@ -4,10 +4,10 @@ console.log("JS betöltve.")
 
 let xhrBevetel = new XMLHttpRequest();
 
-xhrBevetel.open("GET", "./api/bevetelek.php");
+xhrBevetel.open("GET", "/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/api/bevetelek.php");
 
 xhrBevetel.onreadystatechange = function () {
-  if (xhrBevetel.xhrBevetel.readyState == 4 && xhrBevetel.status == 200) {
+  if (xhrBevetel.readyState == 4 && xhrBevetel.status == 200) {
 
     let adatok = JSON.parse(xhrBevetel.responseText);
 
@@ -28,8 +28,8 @@ xhrBevetel.onreadystatechange = function () {
 
 
       let tdModositas = document.createElement("td");
-      let modositasGomb = document.createElement("butten");
-      modositasGomb.className = "btn btn-warnincs btn-sm";
+      let modositasGomb = document.createElement("button");
+      modositasGomb.className = "btn btn-warning btn-sm";
       modositasGomb.innerText = "Módosítás";
       modositasGomb.onclick = function () {
         alert("Módosítás még nincs kész!");
@@ -37,7 +37,7 @@ xhrBevetel.onreadystatechange = function () {
       tdModositas.appendChild(modositasGomb);
 
       let tdTorles = document.createElement("td");
-      let torlesGomb = document.createElement("butten");
+      let torlesGomb = document.createElement("button");
       torlesGomb.className = "btn btn-danger btn-sm";
       torlesGomb.innerText = "Törlés";
       torlesGomb.onclick = function () {
@@ -45,9 +45,9 @@ xhrBevetel.onreadystatechange = function () {
       };
       tdTorles.appendChild(torlesGomb);
 
-      tr.appendChild(tdNév);
-      tr.appendChild(tdDatum);
-      tr.appendChild(tdOsszeg);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
       tr.appendChild(tdModositas);
       tr.appendChild(tdTorles);
 
@@ -65,10 +65,10 @@ xhrBevetel.send(null);
 
 let xhrKiadas = new XMLHttpRequest();
 
-xhrKiadas.open("GET", "./api/kiadasok.php");
+xhrKiadas.open("GET", "/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/api/kiadasok.php");
 
 xhrKiadas.onreadystatechange = function () {
-  if (xhrBevetel.xhrKiadas.readyState == 4 && xhrKiadas.status == 200) {
+  if (xhrKiadas.readyState == 4 && xhrKiadas.status == 200) {
 
     let adatok = JSON.parse(xhrKiadas.responseText);
 
@@ -89,8 +89,8 @@ xhrKiadas.onreadystatechange = function () {
 
 
       let tdModositas = document.createElement("td");
-      let modositasGomb = document.createElement("butten");
-      modositasGomb.className = "btn btn-warnincs btn-sm";
+      let modositasGomb = document.createElement("button");
+      modositasGomb.className = "btn btn-warning btn-sm";
       modositasGomb.innerText = "Módosítás";
       modositasGomb.onclick = function () {
         alert("Módosítás még nincs kész!");
@@ -98,7 +98,7 @@ xhrKiadas.onreadystatechange = function () {
       tdModositas.appendChild(modositasGomb);
 
       let tdTorles = document.createElement("td");
-      let torlesGomb = document.createElement("butten");
+      let torlesGomb = document.createElement("button");
       torlesGomb.className = "btn btn-danger btn-sm";
       torlesGomb.innerText = "Törlés";
       torlesGomb.onclick = function () {
@@ -106,9 +106,9 @@ xhrKiadas.onreadystatechange = function () {
       };
       tdTorles.appendChild(torlesGomb);
 
-      tr.appendChild(tdNév);
-      tr.appendChild(tdDatum);
-      tr.appendChild(tdOsszeg);
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
       tr.appendChild(tdModositas);
       tr.appendChild(tdTorles);
 

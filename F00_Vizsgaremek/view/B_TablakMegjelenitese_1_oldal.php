@@ -14,29 +14,13 @@
 
   <div class="container my-4">
     <div class="row">
+
       <div class="col-12">
         <h1 class="text-center">Táblák megjelenítése</h1>
 
         <h2>Kiadás táblák</h2>
         <table class="table table-striped my-4">
-          <thead class="table-danger text-center">
-            <tr>
-              <th>Név</th>
-              <th>Dátum</th>
-              <th>Összeg</th>
-              <th>Módosítás</th>
-              <th>Törlés</th>
-            </tr>
-          </thead>
-          <tbody id="bevetelTorzs"></tbody>
-        </table>
-      </div>
-
-      <div class="col-12">
-
-        <h2>Bevétel táblák</h2>
-        <table class="table table-striped my-4">
-          <thead class="table-danger text-center">
+          <thead class="table-danger">
             <tr>
               <th>Név</th>
               <th>Dátum</th>
@@ -46,6 +30,23 @@
             </tr>
           </thead>
           <tbody id="kiadasTorzs"></tbody>
+        </table>
+      </div>
+
+      <div class="col-12">
+
+        <h2>Bevétel táblák</h2>
+        <table class="table table-striped my-4">
+          <thead class="table-danger">
+            <tr>
+              <th>Név</th>
+              <th>Dátum</th>
+              <th>Összeg</th>
+              <th>Módosítás</th>
+              <th>Törlés</th>
+            </tr>
+          </thead>
+          <tbody id="bevetelTorzs"></tbody>
         </table>
 
       </div>
@@ -63,7 +64,15 @@
 
 
   <?php include_once("base/footer.html") ?>
-  <script src="/F00_Vizsgaremek/view/JavaScript/reszletek.js"></script>
+  <script>
+    console.log("TABLA OLDAL BETÖLTÖTT");
+  </script>
+
+  <script src="/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/view/JavaScript/reszletek.js"></script>
+
+  <script>
+    console.log("JS SCRIPT TAG UTÁN");
+  </script>
 </body>
 
 </html>

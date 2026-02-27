@@ -11,7 +11,7 @@ class BevetelekRepo
     }
     $con->set_charset("utf8mb4");
 
-    $stmt = $con->prepare("SELECT Bevetelek_Id, Osszeg, Datum, Kategoria_Id, Megjegyzes FROM Bevetelek;");
+    $stmt = $con->prepare("SELECT Bevetelek_Id, Osszeg, Datum, Kategoria_Id FROM Bevetelek;");
     if (!$stmt) throw new Exception("SQL prepare hiba: " . $con->error);
     if (!$stmt->execute()) throw new Exception("SQL execute hiba: " . $stmt->error);
 
