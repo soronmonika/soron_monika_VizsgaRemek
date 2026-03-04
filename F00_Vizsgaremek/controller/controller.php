@@ -16,6 +16,10 @@ function betoltes(string $class): void
 }
 spl_autoload_register("betoltes");
 
+function fooldalView(string $error = ""): void
+{
+  include_once(__DIR__ . "/../view/fooldal.php");
+}
 
 function kalkulatorView(string $error = "", string $success = ""): void
 {
@@ -30,7 +34,7 @@ function tablaView(string $error = ""): void
 {
   $bevetelek = BevetelekRepo::getBevetelek() ?? [];
   $kiadasok = KiadasokRepo::getKiadasok() ?? [];
-  include_once(__DIR__ . "/../view/B_TablakMegjelnitese_1_oldal.php");
+  include_once(__DIR__ . "/../view/B_TablakMegjelenitese_1_oldal.php");
 }
 
 function post(string $kulcs, string $default = ""): string
@@ -38,6 +42,15 @@ function post(string $kulcs, string $default = ""): string
   return array_key_exists($kulcs, $_POST) ? trim((string)$_POST[$kulcs]) : $default;
 }
 
+function tudatossagView(string $error = ""): void
+{
+  include_once(__DIR__ . "/../view/C_Megtakaritasok_koltesiSzokasok_3_oldal.php");
+}
+
+function nyomtatvanyokView(string $error = ""): void
+{
+  include_once(__DIR__ . "/../view/D_Nyomtatvanyok_4_oldal.php");
+}
 
 
 function bevetelMentes(): void
@@ -190,15 +203,30 @@ function main(): void
     }
   }
 
+
+
+
   $oldal = array_key_exists("oldal", $_GET) ? $_GET["oldal"] : "kalkulator";
 
   switch ($oldal) {
+    case "fooldal":
+      fooldalView();
+      return;
+
     case "kalkulator":
       kalkulatorView();
       return;
 
     case "tabla":
       tablaView();
+      return;
+
+    case "tudatossag":
+      tudatossagView();
+      return;
+
+    case "nyomtatvanyok":
+      nyomtatvanyokView();
       return;
 
     default:

@@ -1,13 +1,15 @@
 //Bevételek lekérdezése
 
-console.log("JS betöltve.")
-
 let xhrBevetel = new XMLHttpRequest();
 
 xhrBevetel.open("GET", "/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/api/bevetelek.php");
 
 xhrBevetel.onreadystatechange = function () {
-  if (xhrBevetel.readyState == 4 && xhrBevetel.status == 200) {
+  if (xhrBevetel.readyState == 4) {
+    if (xhrBevetel.status !== 200) {
+      console.log("Bevételek hiba:", xhrBevetel.status, xhrBevetel.responseText);
+      return;
+    }
 
     let adatok = JSON.parse(xhrBevetel.responseText);
 
@@ -40,11 +42,30 @@ xhrBevetel.onreadystatechange = function () {
       let torlesGomb = document.createElement("button");
       torlesGomb.className = "btn btn-danger btn-sm";
       torlesGomb.innerText = "Törlés";
-      torlesGomb.onclick = function () {
-        alert("Törlés még nincs kész!");
-      };
-      tdTorles.appendChild(torlesGomb);
 
+      let Bevetel_Id = adatok[i].Bevetelek_Id;
+      torlesGomb.onclick = function () {
+        if (!confirm("Biztos törlös ezt a bevételt?"))
+          return;
+
+        let xhrDel = new XMLHttpRequest();
+        xhrDel.open("DELETE", "/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/api/bevetelek.php?Bevetel_Id=" + encodeURIComponent(Bevetel_Id));
+
+        xhrDel.onreadystatechange = function () {
+          if (xhrDel.readyState == 4) {
+            if (xhrDel.status == 200) {
+              location.reload();
+            }
+            else {
+              alert("Törlés hiba:  " + xhrDel.status);
+              console.log(xhrDel.responseText);
+            }
+          }
+        };
+        xhrDel.send(null);
+      };
+
+      tdTorles.appendChild(torlesGomb);
       tr.appendChild(td1);
       tr.appendChild(td2);
       tr.appendChild(td3);
@@ -52,12 +73,13 @@ xhrBevetel.onreadystatechange = function () {
       tr.appendChild(tdTorles);
 
       tbody.appendChild(tr);
-
     }
   }
 };
 
 xhrBevetel.send(null);
+
+
 
 
 
@@ -101,8 +123,27 @@ xhrKiadas.onreadystatechange = function () {
       let torlesGomb = document.createElement("button");
       torlesGomb.className = "btn btn-danger btn-sm";
       torlesGomb.innerText = "Törlés";
+      let Kiadasok_Id = adatok[i].Kiadasok_Id;
+
       torlesGomb.onclick = function () {
-        alert("Törlés még nincs kész!");
+        if (!confirm("Biztos törlöd ezt a kiadást?"))
+          return;
+
+        let xhrDel = new XMLHttpRequest();
+        xhrDel.open("DELETE", "/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/api/kiadasok.php?Kiadasok_Id=" + encodeURIComponent(Kiadasok_Id));
+
+        xhrDel.onreadystatechange = function () {
+          if (xhrDel.readyState == 4) {
+            if (xhrDel.status == 200) {
+              location.reload();
+            }
+            else {
+              alert("Törlés hiba:  " + xhrDel.status);
+              console.log(xhrDel.responseText);
+            }
+          }
+        };
+        xhrDel.send(null);
       };
       tdTorles.appendChild(torlesGomb);
 

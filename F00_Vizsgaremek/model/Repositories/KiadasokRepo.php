@@ -15,7 +15,7 @@ class KiadasokRepo
     if (!$stmt) throw new Exception("SQL prepare hiba: " . $con->error);
     if (!$stmt->execute()) throw new Exception("SQL execute hiba: " . $stmt->error);
 
-    $stmt->bind_result($Kiadasok_Id, $Osszeg, $Datum, $Kategoria_Id,);
+    $stmt->bind_result($Kiadasok_Id, $Osszeg, $Datum, $Kategoria_Id);
 
     $kiadasok = [];
     while ($stmt->fetch()) {
@@ -49,4 +49,24 @@ class KiadasokRepo
     $stmt->close();
     $con->close();
   }
-}
+
+
+
+  public static function deleteKiadas(string $Kiadasok_Id): void
+  {
+    $con = new mysqli("127.0.0.1", "root", "", "KoltsegNyilvantartoRendszer_SoronMonika");
+    if ($con->connect_error) {
+      throw new Exception("DB kapcsolat hiba: " . $con->connect_error);
+    }
+    $con->set_charset("utf8mb4");
+
+    $stmt = $con->prepare("DELETE FROM Kiadasok WHERE Kiadasok_Id=?");
+    if (!$stmt) throw new Exception(("SQL prepare hiba: " . $con->error));
+
+    $stmt->bind_param("s", $Kiadasok_Id);
+    if (!$stmt->execute()) throw new Exception(("SQL execute hiba: " . $stmt->error));
+
+    $stmt->close();
+    $con->close();
+  }
+};

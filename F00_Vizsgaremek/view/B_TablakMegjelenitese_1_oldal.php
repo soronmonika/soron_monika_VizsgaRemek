@@ -64,15 +64,9 @@
 
 
   <?php include_once("base/footer.html") ?>
-  <script>
-    console.log("TABLA OLDAL BETÖLTÖTT");
-  </script>
 
   <script src="/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/view/JavaScript/reszletek.js"></script>
 
-  <script>
-    console.log("JS SCRIPT TAG UTÁN");
-  </script>
 </body>
 
 </html>

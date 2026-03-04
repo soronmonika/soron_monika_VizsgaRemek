@@ -23,6 +23,7 @@
   <div class=" container my-4">
     <div class="row g-4">
 
+      <h1 class="mx-0">Havi kalkulátor</h1>
       <!-- KIADÁS -->
       <div class="col-lg-6">
         <div id="kiadas">
