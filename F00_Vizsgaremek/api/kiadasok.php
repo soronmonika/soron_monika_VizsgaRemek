@@ -35,5 +35,26 @@ if ($method == "DELETE") {
   exit;
 }
 
+
+
+if ($method == "PUT") {
+  parse_str(file_get_contents("php://input"), $putData);
+
+  $Kiadasok_Id = trim($putData["Kiadasok_Id"] ?? "");
+  $Osszeg = floatval($putData["Osszeg"] ?? 0);
+  $Datum = trim($putData["Datum"] ?? "");
+  $Kategoria_Id = trim($putData["Kategoria_Id"] ?? "");
+
+  if ($Kiadasok_Id == "") {
+    http_response_code(400);
+    echo json_encode(["error" => "Hiányzó ID"]);
+    exit;
+  }
+
+  KiadasokRepo::updateKiadasok($Kiadasok_Id, $Osszeg, $Datum, $Kategoria_Id);
+  echo json_encode(["ok" => true, "Kiadasok_id => $Kiadasok_Id"]);
+  exit;
+}
+
 http_response_code(405);
 echo json_encode(["error" => "Nem támogatott metódus!"]);

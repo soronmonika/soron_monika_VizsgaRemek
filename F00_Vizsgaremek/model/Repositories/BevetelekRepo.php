@@ -69,7 +69,7 @@ class BevetelekRepo
     $con->close();
   }
 
-    public static function updateBevetel(string $Bevetelek_Id): void
+  public static function updateBevetel(string $Bevetelek_Id, float $Osszeg, string $Datum, string $Kategoria_Id): void
   {
     $con = new mysqli("127.0.0.1", "root", "", "KoltsegNyilvantartoRendszer_SoronMonika");
     if ($con->connect_error) {
@@ -77,15 +77,13 @@ class BevetelekRepo
     }
     $con->set_charset("utf8mb4");
 
-    $stmt = $con->prepare("DELETE FROM Bevetelek SET Osszeg=?, Kategoria_Id=?, WHRE Bevetelek_Id=?");
-    if (!$stmt) throw new Exception(("SQL prepare hiba: " . $con->error));
+    $stmt = $con->prepare("UPDATE Bevetelek SET Osszeg=?, Datum=?, Kategoria_Id=? WHERE Bevetelek_Id=?");
+    if (!$stmt) throw new Exception("SQL prepare hiba: " . $con->error);
 
     $stmt->bind_param("dsss", $Osszeg, $Datum, $Kategoria_Id, $Bevetelek_Id);
-
-    if (!$stmt->execute()) throw new Exception(("SQL execute hiba: " . $stmt->error));
+    if (!$stmt->execute()) throw new Exception("SQL execute hiba: " . $stmt->error);
 
     $stmt->close();
     $con->close();
+  }
 }
-
-

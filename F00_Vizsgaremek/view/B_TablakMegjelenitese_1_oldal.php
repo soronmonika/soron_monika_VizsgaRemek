@@ -62,10 +62,9 @@
 
 
 
-
   <?php include_once("base/footer.html") ?>
 
-  <script src="/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/view/JavaScript/reszletek.js"></script>
+  <script src="/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/view/JavaScript/script.js"></script>
 
 </body>
 

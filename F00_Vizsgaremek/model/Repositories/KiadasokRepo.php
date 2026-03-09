@@ -69,4 +69,22 @@ class KiadasokRepo
     $stmt->close();
     $con->close();
   }
+
+  public static function updateKiadasok(string $Kiadasok_Id, float $Osszeg, string $Datum, string $Kategoria_Id): void
+  {
+    $con = new mysqli("127.0.0.1", "root", "", "KoltsegNyilvantartoRendszer_SoronMonika");
+    if ($con->connect_error) {
+      throw new Exception("DB kapcsolat hiba: " . $con->connect_error);
+    }
+    $con->set_charset("utf8mb4");
+
+    $stmt = $con->prepare("UPDATE Kiadasok SET Osszeg=?, Datum=?, Kategoria_Id=? WHERE Kiadasok_Id=?");
+    if (!$stmt) throw new Exception("SQL prepare hiba: " . $con->error);
+
+    $stmt->bind_param("dsss", $Osszeg, $Datum, $Kategoria_Id, $Kiadasok_Id);
+    if (!$stmt->execute()) throw new Exception("SQL execute hiba: " . $stmt->error);
+
+    $stmt->close();
+    $con->close();
+  }
 };

@@ -23,7 +23,59 @@
   <div class=" container my-4">
     <div class="row g-4">
 
-      <h1 class="mx-0">Havi kalkulátor</h1>
+      <h1 class="text-center">Havi kalkulátor</h1>
+
+      <!-- ÖSSZESÍTŐ-->
+
+      <div class="container my-4">
+        <div class="row mt-4">
+
+          <?php if ($error !== ""): ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+          <?php endif; ?>
+
+
+          <div class="col-lg-12">
+            <div id="osszesito">
+              <h1>Összesítő</h1>
+              <form action="../controller/controller.php" method="post">
+                <input type="hidden" name="Osszesito" id="Osszesito">
+
+                <div class="row g-3">
+
+                  <div class="col-md-4">
+                    <label class="form-label" for="OsszBevetel">Összes bevétel</label>
+                    <div class="input-group">
+                      <input class="form-control" type="number" name="OsszBevetel" id="OsszBevetel" value="0" readonly>
+                      <span class="input-group-text">Ft</span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label" for="OsszKiadas">Összes kiadás</label>
+                    <div class="input-group">
+                      <input class="form-control" type="number" name="OsszKiadas" id="OsszKiadas" value="0" readonly>
+                      <span class="input-group-text">Ft</span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label" for="egyenleg">Egyenleg</label>
+                    <div class="input-group">
+                      <input class="form-control" type="number" name="egyenleg" id="egyenleg" value="0" readonly>
+                      <span class="input-group-text">Ft</span>
+                    </div>
+                    <div class="form-text">Egyenleg=bevétel-kiadás</div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
       <!-- KIADÁS -->
       <div class="col-lg-6">
         <div id="kiadas">
@@ -118,7 +170,7 @@
               </div>
 
               <div class="col-4 d-flex justify-content-end gap-2">
-                <input class="form-control w-auto" type="number" min="0" name="KozlekedesOssz" id="KozlekedesOssz" placeholder="0">
+                <input class="form-control w-auto" type="number" min="0" name="KozlekedesOssz" id="KozlekedesOssz" placeholder="0" readonly>
                 <span class="align-self-center">Ft</span>
               </div>
             </div>
@@ -200,7 +252,7 @@
               </div>
 
               <div class="col-4 d-flex justify-content-end gap-2">
-                <input class="form-control w-auto" type="number" min="0" name="ElofizetesekOssz" id="ElofizetesekOssz" placeholder="0">
+                <input class="form-control w-auto" type="number" min="0" name="ElofizetesekOssz" id="ElofizetesekOssz" placeholder="0" readonly>
                 <span class="align-self-center">Ft</span>
               </div>
             </div>
@@ -249,7 +301,7 @@
               </div>
 
               <div class="col-4 d-flex justify-content-end gap-2">
-                <input class="form-control w-auto" type="number" min="0" name="VasarlasokOssz" id="VasarlasokOssz" placeholder="0">
+                <input class="form-control w-auto" type="number" min="0" name="VasarlasokOssz" id="VasarlasokOssz" placeholder="0" readonly>
                 <span class="align-self-center">Ft</span>
               </div>
             </div>
@@ -335,7 +387,7 @@
               </div>
 
               <div class="col-4 d-flex justify-content-end gap-2">
-                <input class="form-control w-auto" type="number" min="0" name="SzabadidoOssz" id="SzabadidoOssz" placeholder="0">
+                <input class="form-control w-auto" type="number" min="0" name="SzabadidoOssz" id="SzabadidoOssz" placeholder="0" readonly>
                 <span class="align-self-center">Ft</span>
               </div>
             </div>
@@ -400,7 +452,7 @@
               </div>
 
               <div class="col-4 d-flex justify-content-end gap-2">
-                <input class="form-control w-auto " type="number" min="0" name="RendkivuliOssz" id="RendkivuliOssz" placeholder="0">
+                <input class="form-control w-auto " type="number" min="0" name="RendkivuliOssz" id="RendkivuliOssz" placeholder="0" readonly>
                 <span class="align-self-center">Ft</span>
               </div>
             </div>
@@ -540,61 +592,10 @@
     </div>
   </div>
 
-  <!-- ÖSSZESÍTŐ-->
 
 
-
-  <div class="container my-4">
-    <div class="row mt-4">
-
-      <?php if ($error !== ""): ?>
-        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-      <?php endif; ?>
-
-
-      <div class="col-lg-12">
-        <div id="osszesito">
-          <h1>Összesítő</h1>
-          <form action="../controller/controller.php" method="post">
-            <input type="hidden" name="Osszesito" id="Osszesito">
-
-            <div class="row g-3">
-
-              <div class="col-md-4">
-                <label class="form-label" for="OsszBevetel">Összes bevétel</label>
-                <div class="input-group">
-                  <input class="form-control" type="number" name="OsszBevetel" id="OsszBevetel" value="0" readonly>
-                  <span class="input-group-text">Ft</span>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label" for="OsszKiadas">Összes kiadás</label>
-                <div class="input-group">
-                  <input class="form-control" type="number" name="OsszKiadas" id="OsszKiadas" value="0" readonly>
-                  <span class="input-group-text">Ft</span>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label" for="egyenleg">Egyenleg</label>
-                <div class="input-group">
-                  <input class="form-control" type="number" name="egyenleg" id="egyenleg" value="0" readonly>
-                  <span class="input-group-text">Ft</span>
-                </div>
-                <div class="form-text">Egyenleg=bevétel-kiadás</div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
 
   <?php include_once("base/footer.html") ?>
-
 
   <script src="../view/JavaScript/kalkulator.js"></script>
 

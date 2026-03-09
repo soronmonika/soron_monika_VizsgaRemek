@@ -12,6 +12,7 @@
 <body>
   <?php include_once("base/navbar.html") ?>
 
+  <p></p>
 
   <?php include_once("base/footer.html") ?>
 
