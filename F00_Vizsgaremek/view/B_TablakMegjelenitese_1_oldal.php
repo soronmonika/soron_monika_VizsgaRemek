@@ -89,10 +89,9 @@
       </table>
 
 
-      <form action="../controller/controller.php" method="post" class="my-3">
-        <input type="hidden" name="Mentes" value="ReszletekCSV">
-        <button type="submit" name="Letöltés" value="ReszletekCSV" class="btn btn-danger">Részletek letöltése (CSV)</button>
-      </form>
+      <a href="/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/api/letoltesCsv.php" class="btn btn-dark my-3 ">Letöltés CSV/Excel
+      </a>
+
     </div>
   </div>
 
