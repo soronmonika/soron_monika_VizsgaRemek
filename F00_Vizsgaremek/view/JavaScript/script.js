@@ -1,4 +1,60 @@
-console.log("JS betöltve.");
+let OsszesBevetel = 0;
+let OsszesKiadas = 0;
+
+function frissitEgyenleg() {
+  let Egyenleg = OsszesBevetel - OsszesKiadas;
+
+  let elem = document.getElementById("Egyenleg")
+
+  elem.innerText = Egyenleg + "Ft";
+
+  if (Egyenleg < 0) {
+    elem.style.color = "red";
+    elem.innerText = "!" + Egyenleg + "Ft";
+  }
+  else {
+    elem.style.color = "limegreen";
+  }
+
+  Diagram();
+}
+
+let diagram = null;
+
+function Diagram() {
+  let ctx = document.getElementById("KoltsegDiagram");
+
+  if (!ctx)
+    return;
+
+  if (diagram !== null) {
+    diagram.destroy();
+  }
+
+  diagram = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: ["Bevétel", "Kiadás"],
+      datasets: [{
+        label: "Összeg (Ft)",
+        data: [OsszesBevetel, OsszesKiadas]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "top",
+          labels: {
+            boxWidth: 20,
+            padding: 15
+          }
+        }
+      }
+    }
+  });
+}
 
 let xhrBevetel = new XMLHttpRequest();
 xhrBevetel.open("GET", "/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/api/bevetelek.php");
@@ -10,8 +66,18 @@ xhrBevetel.onreadystatechange = function () {
     console.log("Bevételek hiba:", xhrBevetel.status, xhrBevetel.responseText);
     return;
   }
-
   let adatok = JSON.parse(xhrBevetel.responseText);
+
+
+  OsszesBevetel = 0;
+  for (let i = 0; i < adatok.length; i++) {
+    OsszesBevetel += Number(adatok[i].Osszeg);
+  }
+  document.getElementById("OsszesBevetel").innerText = OsszesBevetel + "Ft";
+  frissitEgyenleg();
+
+
+
   let tbody = document.getElementById("bevetelTorzs");
   tbody.innerHTML = "";
 
@@ -134,6 +200,17 @@ xhrKiadas.onreadystatechange = function () {
   }
 
   let adatok = JSON.parse(xhrKiadas.responseText);
+
+
+  OsszesKiadas = 0;
+  for (let i = 0; i < adatok.length; i++) {
+    OsszesKiadas += Number(adatok[i].Osszeg);
+  }
+  document.getElementById("OsszesKiadas").innerText = OsszesKiadas + "Ft";
+  frissitEgyenleg();
+
+
+
   let tbody = document.getElementById("kiadasTorzs");
   tbody.innerHTML = "";
 
@@ -241,3 +318,5 @@ xhrKiadas.onreadystatechange = function () {
 };
 
 xhrKiadas.send(null);
+
+
