@@ -6,11 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalkulátor</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="../view/style.css">
+  <link rel="stylesheet" type="text/css" href="../view/CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="../view/CSS/design.css">
 </head>
 
 <body>
   <?php include_once("base/navbar.html") ?>
+
+
+  <div class="container top-hero text-center my-4">
+    <p class="motto"><b>Egy kis tudatosság ma - nagyobb biztonság holnap!
+        <img src="/KCS_202507/01_Vizsgaremek/F00_Vizsgaremek/view/base/Vizsgamunka_LogoPng.png" alt="Logó" title="Logó" width="250">
+      </b></p>
+  </div>
+
 
   <?php if (!empty($ErrorUzenet)): ?>
     <div class="alert alert-danger container mt-3"><?= htmlspecialchars($ErrorUzenet) ?></div>
@@ -20,10 +29,10 @@
     <div class="alert alert-success container mt-3"><?= htmlspecialchars($SuccessUzenet) ?></div>
   <?php endif; ?>
 
-  <div class=" container my-4">
+  <div class=" container my-4 kalkulator-blokk">
     <div class="row g-4">
 
-      <h1 class="text-center">Havi kalkulátor</h1>
+      <h1>Havi kalkulátor</h1>
 
       <!-- ÖSSZESÍTŐ-->
 
@@ -37,7 +46,7 @@
 
           <div class="col-lg-12">
             <div id="osszesito">
-              <h1>Összesítő</h1>
+              <h1 class="text-center">Összesítő</h1>
               <form action="../controller/controller.php" method="post">
                 <input type="hidden" name="Osszesito" id="Osszesito">
 
@@ -497,7 +506,7 @@
             </div>
 
             <div class="d-grid mt-3">
-              <button type="submit" class="btn btn-primary">Kiadások mentése</button>
+              <button type="submit" class="btn btn-primary">Kiadások mentés</button>
             </div>
           </form>
 
@@ -579,10 +588,9 @@
                   </div>
                 </div>
 
-                <input type="hidden" name="Mentes" value="BevetelMentes">
-                <div class="d-grid mt-3">
-                  <button type="submit" class="btn btn-success">Bevétel mentése</button>
-                </div>
+            <div class="d-grid mt-3">
+              <button type="submit" class="btn btn-primary">Bevétel mentés</button>
+            </div>
           </form>
 
 
@@ -593,10 +601,7 @@
   </div>
 
 
-
-
   <?php include_once("base/footer.html") ?>
-
   <script src="../view/JavaScript/kalkulator.js"></script>
 
 </body>

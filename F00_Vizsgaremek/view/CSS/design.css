@@ -1,0 +1,246 @@
+:root{
+  --bg1:#6e4f80;
+  --bg2:#8a6a9c;
+
+  --card: #e2bbf3;
+  --card-soft: #faf7fc;
+
+  --primary:#5f2f75;
+  --primary-dark:#452157;
+
+  --text: #492b66;
+
+  --success:#1f8f55;
+  --danger:#d94b63;
+  --info:#256fe8;
+
+  --border:#d9c6e3;
+
+  --shadow:0 6px 14px rgba(0,0,0,0.12);
+}
+
+body{
+  background: linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+}
+
+
+.navbar{
+  background-color:rgba(69,33,87,0.95) !important;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand{
+  color:#f8f2fb !important;
+  font-weight:600;
+}
+
+.navbar .nav-link:hover{
+  color:#eadbf2 !important;
+}
+
+
+footer{
+  background-color:rgba(69,33,87,0.95);
+  color:#f8f2fb;
+  text-align:center;
+  padding:18px 0;
+  margin-top:40px;
+}
+
+
+.top-hero{
+  text-align:center;
+  padding:25px 0 10px 0;
+}
+
+.top-hero img{
+  max-width:120px;
+  margin-bottom:10px;
+}
+
+.top-hero .motto{
+  font-size:1.1rem;
+  font-weight:700;
+  color:white;
+}
+
+
+.card{
+  background-color:var(--card);
+  border:none;
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+
+.card-body{
+  padding:20px;
+}
+
+
+.dashboard-card{
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+
+.stat-value{
+  font-size:1.6rem;
+  font-weight:800;
+}
+
+.stat-income{
+  background:linear-gradient(135deg,#1f8f55,#2aa666);
+  color:white;
+}
+
+.stat-expense{
+  background:linear-gradient(135deg,#d94b63,#e65f78);
+  color:white;
+}
+
+.stat-balance{
+  background:linear-gradient(135deg,#256fe8,#4289ff);
+  color:white;
+}
+
+
+.diagram-card{
+  background-color:var(--card);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+
+.diagram-wrap{
+  width:320px;
+  height:320px;
+  margin:auto;
+}
+
+.table{
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.table thead th{
+  background-color:#e7d8ef !important;
+  color: #6a3285;
+  font-weight:700;
+}
+
+.table tbody tr{
+  background-color:rgba(255,255,255,0.6);
+}
+
+.table tbody tr:hover{
+  background-color:rgba(255,255,255,0.9);
+}
+
+.table td,
+.table th{
+  vertical-align:middle;
+}
+
+
+.table-card{
+  background-color:var(--card);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  margin-top:25px;
+}
+
+
+.kalkulator-blokk{
+  background-color:var(--card);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:20px;
+  margin-bottom:25px;
+}
+
+
+input,
+select,
+textarea{
+  border-radius:10px !important;
+  border:1px solid var(--border) !important;
+  background-color:var(--card-soft) !important;
+  color:var(--text);
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:var(--primary) !important;
+  box-shadow:0 0 0 0.2rem rgba(95,47,117,0.15);
+}
+
+
+.btn{
+  border-radius:10px;
+  font-weight:600;
+}
+
+
+.btn-primary{
+  background-color:var(--primary) !important;
+  border-color:var(--primary) !important;
+}
+
+.btn-primary:hover{
+  background-color:var(--primary-dark) !important;
+  border-color:var(--primary-dark) !important;
+}
+
+
+.btn-success{
+  background-color:var(--success) !important;
+  border-color:var(--success) !important;
+}
+
+
+.btn-danger{
+  background-color:var(--danger) !important;
+  border-color:var(--danger) !important;
+}
+
+
+.btn-warning{
+  background-color:#b47ac7 !important;
+  border-color:#b47ac7 !important;
+  color:white !important;
+}
+
+
+.export-wrap{
+  text-align:center;
+  margin:30px 0;
+}
+
+
+#egyenleg.pozitiv{
+  color:#d7ffe4 !important;
+}
+
+#egyenleg.negativ{
+  color:#ffe0e4 !important;
+}
+
+
+@media(max-width:768px){
+
+  .diagram-wrap{
+    width:250px;
+    height:250px;
+  }
+
+  .stat-value{
+    font-size:1.3rem;
+  }
+
+}
+
+a:link{
+  color: white;
+}

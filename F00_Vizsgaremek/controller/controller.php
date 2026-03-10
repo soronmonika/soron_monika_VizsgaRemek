@@ -16,10 +16,6 @@ function betoltes(string $class): void
 }
 spl_autoload_register("betoltes");
 
-function fooldalView(string $error = ""): void
-{
-  include_once(__DIR__ . "/../view/fooldal.php");
-}
 
 function kalkulatorView(string $error = "", string $success = ""): void
 {
@@ -49,7 +45,7 @@ function tudatossagView(string $error = ""): void
 
 function nyomtatvanyokView(string $error = ""): void
 {
-  include_once(__DIR__ . "/../view/D_Nyomtatvanyok_4_oldal.php");
+  include_once(__DIR__ . "/../view/D_Linkek_4_oldal.php");
 }
 
 
@@ -209,10 +205,6 @@ function main(): void
   $oldal = array_key_exists("oldal", $_GET) ? $_GET["oldal"] : "kalkulator";
 
   switch ($oldal) {
-    case "fooldal":
-      fooldalView();
-      return;
-
     case "kalkulator":
       kalkulatorView();
       return;
